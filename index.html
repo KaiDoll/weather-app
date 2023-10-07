@@ -22,7 +22,7 @@
       <h1>Weather Dashboard</h1>
     </header>
     <main class="container-fluid">
-      <div class="row">
+      <div class="row min-vh-100 no-gutters">
         <div class="col-md col-xl-4">
           <!-- Add project form and instructions -->
           <div class="card mb-3">
@@ -35,17 +35,16 @@
                   </div>
             <div class="card-footer">
               <button
-                class="btn btn-block btn-custom w-100">
+                class="btn btn-block btn-custom w-100" id="city-weather">
                 Search
               </button>
             </div>
           </div>
         </div>
 
-       
     
 
-        <div class="col-md col-xl-8">
+        <!-- <div class="col-md col-xl-8"> -->
           <!-- Project Table
           <table class="table table-custom">
             <thead>
@@ -79,14 +78,28 @@
           </table>
         </div> -->
       </div>
+      
+      <div class="col-md col-xl-4">
+        <!-- Add project form and instructions -->
+        <div class="card mb-3">
+          <h2 class="h4 card-header custom-card-header">Search For a City:</h2>
+          <div class="card-body">
+              <div class="container-fluid p-3">
+                  <form id="search-form" class="d-flex">
+                    <input id ="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  </form>
+                </div>
+          <div class="card-footer">
+            <button
+              class="btn btn-block btn-custom w-100" id="city-weather">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Modal for adding a new project -->
-    <div class="col-12 col-md-9 p-3 text-light">
-      <h2>Showing results for <span id="result-text"></span></h2>
-      <div id="result-content"></div>
-    </div>
-  </div>
 
     
 

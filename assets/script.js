@@ -1,4 +1,5 @@
 var searchForm = document.querySelector('#search-form');
+var findCityWeather =document.getElementById('#city-weather')
 
 function searchBar(event) {
     event.preventDefault();
@@ -15,3 +16,4 @@ function searchBar(event) {
 }
 
 searchForm.addEventListener('search', searchBar);
+findCityWeather.addEventListener ('click, requestWeather);
