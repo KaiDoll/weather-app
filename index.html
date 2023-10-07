@@ -11,19 +11,19 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Martel:wght@600&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <header class="p-5 mb-4 text-left header">
+    <header class="p-3 text-left header">
       <h1>Weather Dashboard</h1>
     </header>
     <main class="container-fluid">
       <div class="row min-vh-100 no-gutters">
-        <div class="col-md col-xl-4">
+        <div class="col-md col-xl-3">
           <!-- Add project form and instructions -->
           <div class="card mb-3">
             <h2 class="h4 card-header custom-card-header">Search For a City:</h2>
@@ -79,23 +79,63 @@
         </div> -->
       </div>
       
-      <div class="col-md col-xl-4">
+      <div class="col-md col-xl-">
         <!-- Add project form and instructions -->
-        <div class="card mb-3">
-          <h2 class="h4 card-header custom-card-header">Search For a City:</h2>
+        <div class="card">
           <div class="card-body">
+            <h2 class="card-title d-flex align-items-center lead font-weight-bold" style="height: 100px">
+              <div id="nameOfTheCity">City</div>
+              <div class="px-1" id="todaysDate"></div>
+            </div>
+            <p class="card-group px-3" id="thermometer">Temperature:</p>
+            <p class="card-group px-3" id="anemometer">Wind:</p>
+            <p class="card-group px-3" id="hygrometer">Humidity:</p>
               <div class="container-fluid p-3">
-                  <form id="search-form" class="d-flex">
-                    <input id ="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  </form>
+                <h2 class="h4 card-header custom-card-header">5 Day Forecast:</h2>
                 </div>
-          <div class="card-footer">
-            <button
-              class="btn btn-block btn-custom w-100" id="city-weather">
-              Search
-            </button>
-          </div>
-        </div>
+                <div class="card-group">
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+      </div>
       </div>
     </main>
 
