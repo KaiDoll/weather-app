@@ -1,6 +1,6 @@
 var apiKey = "f23c92af2b429cef241bcb96ff0315fb";
 var currentWeatherApi = "https://api.openweathermap.org/data/2.5/weather?q=";
-var forecastWeatherApi = "https://api.openweathermap.org/data/2.5/forecast?";
+var forecastWeatherApi = "https://api.openweathermap.org/data/2.5/forecast?q=";
 var searchCityWeather = document.getElementById("search-city-form");
 var unit = "units=imperial";
 
@@ -26,7 +26,7 @@ var forecastCityWeather = function (long, lati) {
 // .then(function(json) {
 //   // use the json
 // });
-function currentCityWeather(findCityName) {
+function currentCityWeather(findCityName) { //Current weather working
   var apiUrl = currentWeatherApi + findCityName + "&appid=" + apiKey + "&" + unit;
   fetch(apiUrl, {method: 'GET'})
   .then(function (response) {return response.json(); })
@@ -34,7 +34,7 @@ function currentCityWeather(findCityName) {
         //if the fetch call is ok then run another function that takes json as a parameter.
         document.getElementById("nameOfTheCity").innerHTML=json.name; //city name
 
-        var date = dayjs("M/D/YYYY"); //date display eg 10/09/2023
+        var date = dayjs().format('M/D/YYYY'); //date display eg 10/09/2023
         document.getElementById("todaysDate").innerHTML=date;
         var weatherIcon = (document.getElementsByClassName("weather-icon").src =
           "http://openweathermap.org/img/wn/" +
@@ -59,9 +59,11 @@ function currentCityWeather(findCityName) {
       });
     } //This is calling the city name and the current date.
 
+//Each function for 5 days forecast but it is not working! 
 function cardOne(weatherData1) {
+  
   document.getElementById("cardOneDate").innerHTML=weatherData1.dt; //convert dt to number date.
-  var weatherIconUrlOne =
+  var weatherIconUrlOne = 
     "http://openweathermap.org/img/wn/" + weatherData1.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-1")
@@ -162,7 +164,6 @@ function cardFive(weatherData5) {
 var searchCitiesWeather = () => {
   var findCityName = document.getElementById('find-city').value
   currentCityWeather(findCityName)
-  cardOne(weatherData1)
 };
 
 // document.getElementById("search-city-form").addEventListener("click", searchCitiesWeather);
