@@ -60,7 +60,7 @@ function currentCityWeather(findCityName) {
     } //This is calling the city name and the current date.
 
 function cardOne(weatherData1) {
-  document.getElementById("cardOneDate").innerHTML(weatherData1.dt); //convert dt to number date.
+  document.getElementById("cardOneDate").innerHTML=weatherData1.dt; //convert dt to number date.
   var weatherIconUrlOne =
     "http://openweathermap.org/img/wn/" + weatherData1.weather[0].icon + ".png";
   document
@@ -68,13 +68,13 @@ function cardOne(weatherData1) {
     .setAttribute("src", weatherIconUrlOne);
   document
     .getElementById("thermometer1")
-    .innerHTML(weatherData1.main.temp + " \u00B0F");
+    .innerHTML=weatherData1.main.temp + " \u00B0F";
   document
     .getElementById("hygrometer1")
-    .innerHTML(weatherData1.main.humidity + " %");
+    .innerHTML=weatherData1.main.humidity + " %";
   document
     .getElementById("anemometer1")
-    .innerHTML(weatherData1.wind.speed + " MPH");
+    .innerHTML=weatherData1.wind.speed + " MPH";
 }
 
 function cardTwo(weatherData2) {
@@ -162,6 +162,7 @@ function cardFive(weatherData5) {
 var searchCitiesWeather = () => {
   var findCityName = document.getElementById('find-city').value
   currentCityWeather(findCityName)
+  cardOne(weatherData1)
 };
 
 // document.getElementById("search-city-form").addEventListener("click", searchCitiesWeather);
