@@ -3,154 +3,145 @@ var currentWeatherApi = "https://api.openweathermap.org/data/2.5/weather?q=";
 var forecastWeatherApi = "https://api.openweathermap.org/data/2.5/forecast?q=";
 var searchCityWeather = document.getElementById("search-city-form");
 var unit = "units=imperial";
-
-var forecastCityWeather = function (long, lati) {
-  var apiUrl =
-    forecastWeatherApi +
-    "lat=" +
-    lati +
-    "&lon=" +
-    long +
-    "&appid=" +
-    apiKey +
-    "&" +
-    unit;
-  fetch(apiUrl).then(function (response) {
-    return response.json();
-  });
+var findCity = document.getElementById("find-city");
+var searchBtn = document.getElementById("search-city-form");
+var storedCity = document.getElementById("storedCity");
+var searchHistory = JSON.parse(localStorage.getItem('cities')) || [];
+var oldSearch = document.getElementById('old-search');
+var forecastCityWeather = function (city) {
+  var apiUrl = forecastWeatherApi + city + "&appid=" + apiKey + "&" + unit;
+  fetch(apiUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      cardOne(data.list[4]);
+      cardTwo(data.list[12]);
+      cardThree(data.list[20]);
+      cardFour(data.list[28]);
+      cardFive(data.list[36]);
+    });
 };
-// fetch(apiUrl, { 
-//   method: 'GET'
-// })
-// .then(function(response) { return response.json(); })
-// .then(function(json) {
-//   // use the json
-// });
-function currentCityWeather(findCityName) { //Current weather working
-  var apiUrl = currentWeatherApi + findCityName + "&appid=" + apiKey + "&" + unit;
-  fetch(apiUrl, {method: 'GET'})
-  .then(function (response) {return response.json(); })
-  .then(function (json) {
-        //if the fetch call is ok then run another function that takes json as a parameter.
-        document.getElementById("nameOfTheCity").innerHTML=json.name; //city name
 
-        var date = dayjs().format('M/D/YYYY'); //date display eg 10/09/2023
-        document.getElementById("todaysDate").innerHTML=date;
-        var weatherIcon = (document.getElementsByClassName("weather-icon").src =
-          "http://openweathermap.org/img/wn/" +
-          json.weather[0].icon +
-          "@2x.png");
-        document
-          .getElementById("weather-icon-0")
-          .setAttribute("src", weatherIcon);
-        document
-          .getElementById("thermometer")
-          .innerHTML=json.main.temp + " \u00B0F"; //shows up as Farenheit sign on the page.
-        document
-          .getElementById("hygrometer")
-          .innerHTML=json.main.humidity + " %"; //response to main as it an object and humidity its property.
-        document
-          .getElementById("anemometer")
-          .innerHTML=json.wind.speed + " MPH"; //response to wind as it an object and speed its property.
-        var long = json.coord.lon;
-        var lati = json.coord.lat;
-        
-        forecastCityWeather(long, lati);
-      });
-    } //This is calling the city name and the current date.
+function currentCityWeather(findCityName) {
+  //Current weather working
+  var apiUrl =
+    currentWeatherApi + findCityName + "&appid=" + apiKey + "&" + unit;
+  fetch(apiUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (json) {
+      storeInStorage(json.name);
+      //if the fetch call is ok then run another function that takes json as a parameter.
+      document.getElementById("nameOfTheCity").innerHTML = json.name; //city name
+      var date = dayjs().format("M/D/YYYY"); //date display eg 10/09/2023
+      document.getElementById("todaysDate").innerHTML = date;
+      var weatherIcon = (document.getElementsByClassName("weather-icon").src =
+        "http://openweathermap.org/img/wn/" + json.weather[0].icon + "@2x.png");
+      document
+        .getElementById("weather-icon-0")
+        .setAttribute("src", weatherIcon);
+      document.getElementById("thermometer").innerHTML =
+        json.main.temp + " \u00B0F"; //shows up as Farenheit sign on the page.
+      document.getElementById("hygrometer").innerHTML =
+        json.main.humidity + " %"; //response to main as it an object and humidity its property.
+      document.getElementById("anemometer").innerHTML =
+        json.wind.speed + " MPH"; //response to wind as it an object and speed its property.
+    });
+} //This is calling the city name and the current date.
 
-//Each function for 5 days forecast but it is not working! 
-function cardOne(weatherData1) {
-  
-  document.getElementById("cardOneDate").innerHTML=weatherData1.dt; //convert dt to number date.
-  var weatherIconUrlOne = 
-    "http://openweathermap.org/img/wn/" + weatherData1.weather[0].icon + ".png";
+function storeInStorage(city) {
+if(searchHistory.includes(city)){
+  return;
+}
+
+  searchHistory.push(city);
+  localStorage.setItem("cities", JSON.stringify(searchHistory));
+}
+//Each function for 5 days forecast but it is not working!
+function cardOne(weatherData) {
+  var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
+  document.getElementById("cardOneDate").innerHTML = formattedDate; //convert dt to number date.
+  var weatherIconUrlOne =
+    "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-1")
     .setAttribute("src", weatherIconUrlOne);
-  document
-    .getElementById("thermometer1")
-    .innerHTML=weatherData1.main.temp + " \u00B0F";
-  document
-    .getElementById("hygrometer1")
-    .innerHTML=weatherData1.main.humidity + " %";
-  document
-    .getElementById("anemometer1")
-    .innerHTML=weatherData1.wind.speed + " MPH";
+  document.getElementById("thermometer1").innerHTML =
+    weatherData.main.temp + " \u00B0F";
+  document.getElementById("hygrometer1").innerHTML =
+    weatherData.main.humidity + " %";
+  document.getElementById("anemometer1").innerHTML =
+    weatherData.wind.speed + " MPH";
 }
 
-function cardTwo(weatherData2) {
-  document.getElementById("cardTwoDate").innerHTML(weatherData2.dt); //convert dt to number date.
+function cardTwo(weatherData) {
+  var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
+  document.getElementById("cardTwoDate").innerHTML = formattedDate; //convert dt to number date.
   var weatherIconUrlTwo =
-    "http://openweathermap.org/img/wn/" + weatherData2.weather[0].icon + ".png";
+    "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-2")
     .setAttribute("src", weatherIconUrlTwo);
-  document
-    .getElementById("thermometer2")
-    .innerHTML(weatherData2.main.temp + " \u00B0F");
-  document
-    .getElementById("hygrometer2")
-    .innerHTML(weatherData2.main.humidity + " %");
-  document
-    .getElementById("anemometer2")
-    .innerHTML(weatherData2.wind.speed + " MPH");
+  document.getElementById("thermometer2").innerHTML =
+    weatherData.main.temp + " \u00B0F";
+  document.getElementById("hygrometer2").innerHTML =
+    weatherData.main.humidity + " %";
+  document.getElementById("anemometer2").innerHTML =
+    weatherData.wind.speed + " MPH";
 }
 //then executes whenever fetch finishes. function runs once fetch is finished.
 //line 12-20 getting json out of the api call to populate the todays city weather.
 
-function cardThree(weatherData3) {
-  document.getElementById("cardThreeDate").innerHTML(weatherData3.dt); //convert dt to number date.
+function cardThree(weatherData) {
+  var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
+  document.getElementById("cardThreeDate").innerHTML = formattedDate;
+  //convert dt to number date.
   var weatherIconUrlThree =
-    "http://openweathermap.org/img/wn/" + weatherData3.weather[0].icon + ".png";
+    "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-3")
     .setAttribute("src", weatherIconUrlThree);
-  document
-    .getElementById("thermometer3")
-    .innerHTML(weatherData3.main.temp + " \u00B0F");
-  document
-    .getElementById("hygrometer3")
-    .innerHTML(weatherData3.main.humidity + " %");
-  document
-    .getElementById("anemometer3")
-    .innerHTML(weatherData3.wind.speed + " MPH");
+  document.getElementById("thermometer3").innerHTML =
+    weatherData.main.temp + " \u00B0F";
+  document.getElementById("hygrometer3").innerHTML =
+    weatherData.main.humidity + " %";
+  document.getElementById("anemometer3").innerHTML =
+    weatherData.wind.speed + " MPH";
 }
 
-function cardFour(weatherData4) {
-  document.getElementById("cardFourDate").innerHTML(weatherData4.dt); //convert dt to number date.
+function cardFour(weatherData) {
+  var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
+  document.getElementById("cardFourDate").innerHTML = formattedDate;
   var weatherIconUrlFour =
-    "http://openweathermap.org/img/wn/" + weatherData4.weather[0].icon + ".png";
+    "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-4")
     .setAttribute("src", weatherIconUrlFour);
-  document
-    .getElementById("thermometer4")
-    .innerHTML(weatherData4.main.temp + " \u00B0F");
-  document
-    .getElementById("hygrometer4")
-    .innerHTML(weatherData4.main.humidity + " %");
-  document
-    .getElementById("anemometer4")
-    .innerHTML(weatherData4.wind.speed + " MPH");
+  document.getElementById("thermometer4").innerHTML =
+    weatherData.main.temp + " \u00B0F";
+  document.getElementById("hygrometer4").innerHTML =
+    weatherData.main.humidity + " %";
+  document.getElementById("anemometer4").innerHTML =
+    weatherData.wind.speed + " MPH";
 }
 
-function cardFive(weatherData5) {
-  document.getElementById("cardFiveDate").innerHTML(weatherData5.dt); //convert dt to number date.
+function cardFive(weatherData) {
+  var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
+  document.getElementById("cardFiveDate").innerHTML = formattedDate;
   var weatherIconUrlFive =
-    "http://openweathermap.org/img/wn/" + weatherData5.weather[0].icon + ".png";
+    "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon + ".png";
   document
     .getElementById("weather-icon-5")
     .setAttribute("src", weatherIconUrlFive);
-  document
-    .getElementById("thermometer3")
-    .innerHTML(weatherData5.main.temp + " \u00B0F");
-  document
-    .getElementById("hygrometer3")
-    .innerHTML(weatherData5.main.humidity + " %");
-  document
-    .getElementById("anemometer3")
-    .innerHTML(weatherData5.wind.speed + " MPH");
+  document.getElementById("thermometer5").innerHTML =
+    weatherData.main.temp + " \u00B0F";
+  document.getElementById("hygrometer5").innerHTML =
+    weatherData.main.humidity + " %";
+  document.getElementById("anemometer5").innerHTML =
+    weatherData.wind.speed + " MPH";
 }
 // var searchCitiesWeather() {
 //   document.getElementById("search-city-form").innerHTML;
@@ -159,11 +150,29 @@ function cardFive(weatherData5) {
 //   cardTwo();
 // }
 
-
-
 var searchCitiesWeather = () => {
-  var findCityName = document.getElementById('find-city').value
-  currentCityWeather(findCityName)
+  var findCityName = document.getElementById("find-city").value;
+  currentCityWeather(findCityName);
+  forecastCityWeather(findCityName);
 };
 
-// document.getElementById("search-city-form").addEventListener("click", searchCitiesWeather);
+// searchBtn.addEventListener('click', function (){
+// var searchedCities = findCity.value;
+// currentCityWeather(searchedCities);
+// searchHistory.push(searchedCities);
+// showOldHistory();
+// })
+
+// function showOldHistory() {
+// oldSearch.innerHTML = "";
+// for (var i = 0; i < searchHistory.length; i++) {
+//   var displaySearch = document.createElement("input");
+//   displaySearch.setAttribute('value', searchHistory[i]);
+//   displaySearch.addEventListener('click', function () {
+//     currentCityWeather(oldSearch.value);
+//   })
+//   oldSearch.append(displaySearch);
+// }
+// } used this but it does not work! 
+
+searchBtn.addEventListener("click", searchCitiesWeather);

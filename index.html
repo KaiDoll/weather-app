@@ -29,18 +29,17 @@
             <h2 class="h4 card-header custom-card-header">Search For a City:</h2>
             <div class="card-body">
                 <div class="container-fluid p-3">
-                    <!-- <form id="search-city-form" class="d-flex"> -->
                       <input id ="find-city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   </div>
             <div class="card-footer">
               <button
-                class="btn btn-block btn-custom w-100" id="search-city-form" onclick="searchCitiesWeather()">
+                class="btn searchBtn btn-block btn-custom w-100" id="search-city-form">
                 Search
               </button>
-            </div>
-          <!-- </form> -->
+            </div>          
           </div>
         </div>
+        <div id="old-search"></div> 
       </div>
       
       <div class="col-md col-xl-">
@@ -64,14 +63,14 @@
                     <div class="card-body">
                       <p class="card-text" id="thermometer1">Temp:</p>
                       <p class="card-text" id="hygrometer1">Humidity:</p>
-                      <p class="card-text" id="anemometer1">Wind:</p>
+                      <p class="card-text" id="anemometer1">Wind:</span></p>
                     </div>
                   </div>
                   <div class="card">
                     <div class="px-1" id="cardTwoDate"></div>
                     <img class="weather-icon" id="weather-icon-2" class="card-img-top" src="">
                     <div class="card-body">
-                      <p class="card-text" id="thermometer2">Temp:</p>
+                      <p class="card-text" id="thermometer2">Temp: </p>
                       <p class="card-text" id="hygrometer2">Humidity:</p>
                       <p class="card-text" id="anemometer2">Wind:</p>
                     </div>
@@ -89,9 +88,9 @@
                     <div class="px-1" id="cardFourDate"></div>
                     <img class="weather-icon" id="weather-icon-4" class="card-img-top" src="">
                     <div class="card-body">
-                      <p class="card-text" id="thermometer4">Temp:</p>
-                      <p class="card-text" id="hygrometer4">Humidity:</p>
-                      <p class="card-text" id="anemometer4">Wind:</p>
+                      <p class="card-text" id="thermometer4">Temp:</span></p>
+                      <p class="card-text" id="hygrometer4">Humidity:</span></p>
+                      <p class="card-text" id="anemometer4">Wind:</span></p>
                     </div>
                   </div>
                   <div class="card">
@@ -99,8 +98,8 @@
                     <img class="weather-icon" id="weather-icon-5" class="card-img-top" src="">
                     <div class="card-body">
                       <p class="card-text" id="thermometer5">Temp:</p>
-                      <p class="card-text" id="hygrometer5">Humidity:</p>
-                      <p class="card-text" id="anemometer5">Wind:</p>
+                      <p class="card-text" id="hygrometer5">Humidity:</span>/p>
+                      <p class="card-text" id="anemometer5">Wind:</span></p>
                     </div>
                   </div>
                 </div>
