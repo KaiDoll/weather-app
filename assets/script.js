@@ -6,8 +6,9 @@ var unit = "units=imperial";
 var findCity = document.getElementById("find-city");
 var searchBtn = document.getElementById("search-city-form");
 var storedCity = document.getElementById("storedCity");
-var searchHistory = JSON.parse(localStorage.getItem('cities')) || [];
-var oldSearch = document.getElementById('old-search');
+var searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
+var oldSearch = document.getElementById("old-search");
+
 var forecastCityWeather = function (city) {
   var apiUrl = forecastWeatherApi + city + "&appid=" + apiKey + "&" + unit;
   fetch(apiUrl)
@@ -53,12 +54,13 @@ function currentCityWeather(findCityName) {
 } //This is calling the city name and the current date.
 
 function storeInStorage(city) {
-if(searchHistory.includes(city)){
-  return;
-}
+  if (searchHistory.includes(city)) {
+    return;
+  }
 
-  searchHistory.push(city);
+  searchHistory.unshift(city);
   localStorage.setItem("cities", JSON.stringify(searchHistory));
+  showOldHistory()
 }
 //Each function for 5 days forecast but it is not working!
 function cardOne(weatherData) {
@@ -143,36 +145,34 @@ function cardFive(weatherData) {
   document.getElementById("anemometer5").innerHTML =
     weatherData.wind.speed + " MPH";
 }
-// var searchCitiesWeather() {
-//   document.getElementById("search-city-form").innerHTML;
-//   ;
-//   cardOne();
-//   cardTwo();
-// }
 
 var searchCitiesWeather = () => {
   var findCityName = document.getElementById("find-city").value;
-  currentCityWeather(findCityName);
-  forecastCityWeather(findCityName);
+  runSearch(findCityName);
 };
 
-// searchBtn.addEventListener('click', function (){
-// var searchedCities = findCity.value;
-// currentCityWeather(searchedCities);
-// searchHistory.push(searchedCities);
-// showOldHistory();
-// })
+function runSearch(findCityName) {
+ 
+  currentCityWeather(findCityName);
+  forecastCityWeather(findCityName);
+}
 
-// function showOldHistory() {
-// oldSearch.innerHTML = "";
-// for (var i = 0; i < searchHistory.length; i++) {
-//   var displaySearch = document.createElement("input");
-//   displaySearch.setAttribute('value', searchHistory[i]);
-//   displaySearch.addEventListener('click', function () {
-//     currentCityWeather(oldSearch.value);
-//   })
-//   oldSearch.append(displaySearch);
-// }
-// } used this but it does not work! 
+function showOldHistory() {
+  oldSearch.innerHTML = "";
+
+  
+  for (var i = 0; i < 5; i++) {
+    var displaySearch = document.createElement("button");
+    displaySearch.textContent = searchHistory[i];
+
+    displaySearch.addEventListener("click", function () {
+      runSearch(this.textContent);
+    });
+    oldSearch.append(displaySearch);
+  }
+}
+
+showOldHistory();
+//  used this but it does not work!
 
 searchBtn.addEventListener("click", searchCitiesWeather);
