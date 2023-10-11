@@ -24,6 +24,8 @@ var forecastCityWeather = function (city) {
       cardFive(data.list[36]);
     });
 };
+//fetch the 5 day forecast API from open weather and add the other functions 
+//card so when this function is called the other functions will help display the forecast. 
 
 function currentCityWeather(findCityName) {
   //Current weather working
@@ -51,7 +53,7 @@ function currentCityWeather(findCityName) {
       document.getElementById("anemometer").innerHTML =
         json.wind.speed + " MPH"; //response to wind as it an object and speed its property.
     });
-} //This is calling the city name and the current date.
+} //This function is calling the city name and the current date.
 
 function storeInStorage(city) {
   if (searchHistory.includes(city)) {
@@ -62,7 +64,7 @@ function storeInStorage(city) {
   localStorage.setItem("cities", JSON.stringify(searchHistory));
   showOldHistory()
 }
-//Each function for 5 days forecast but it is not working!
+
 function cardOne(weatherData) {
   var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
   document.getElementById("cardOneDate").innerHTML = formattedDate; //convert dt to number date.
@@ -94,8 +96,6 @@ function cardTwo(weatherData) {
   document.getElementById("anemometer2").innerHTML =
     weatherData.wind.speed + " MPH";
 }
-//then executes whenever fetch finishes. function runs once fetch is finished.
-//line 12-20 getting json out of the api call to populate the todays city weather.
 
 function cardThree(weatherData) {
   var formattedDate = new Date(weatherData.dt * 1000).toLocaleDateString();
@@ -145,7 +145,7 @@ function cardFive(weatherData) {
   document.getElementById("anemometer5").innerHTML =
     weatherData.wind.speed + " MPH";
 }
-
+//Each function for 5 days forecast.
 var searchCitiesWeather = () => {
   var findCityName = document.getElementById("find-city").value;
   runSearch(findCityName);
@@ -156,11 +156,9 @@ function runSearch(findCityName) {
   currentCityWeather(findCityName);
   forecastCityWeather(findCityName);
 }
-
+//This function call the other two function that runs the current and forecast api. 
 function showOldHistory() {
   oldSearch.innerHTML = "";
-
-  
   for (var i = 0; i < 5; i++) {
     var displaySearch = document.createElement("button");
     displaySearch.textContent = searchHistory[i];
@@ -173,6 +171,6 @@ function showOldHistory() {
 }
 
 showOldHistory();
-//  used this but it does not work!
-
+//This function pulls the city from the local storage and 
+//appends the button and puts the recent search city on the page.
 searchBtn.addEventListener("click", searchCitiesWeather);

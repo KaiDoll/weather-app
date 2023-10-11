@@ -1,36 +1,34 @@
 # weather-app
-04 Web APIs Challenge: Code Quiz
+06 Server-Side APIs Challenge: Weather Dashboard
 
 **Goal**
-To build a timed coding quiz with multiple-choice questions that saves the high score in your local storage. 
+To build Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL.
 
 **Scope of Work**
-The user has to answer five multiple choice questions to receive a high score. The timer will begin as soon as the user click on *Start* button. The timer will continue as the user go through the questions. If the user answers incorrectly then they will be penalized with subtract 10 seconds. At the end the user will have their score displayed and the user will have to put in their initial to view on the *High Score* page. 
+The user will use the search bar to look for the cities. Once the user hits the button. The page will have the current & 5 day forecast displayed. The recently searched city will also be saved on the page for the user ease next time they visit the page. 
 
 **The quiz should contain the following:**
-The quiz should be TIMED
-Penalized user -10secs whenever the user answers it incorrectly
-Store the high score in Local Storage. 
+Current and 5 day weather forecast
+Open Weather API
+Storing searched cities on the localStorage.
 
-**Quiz Page**
+**Weather dashboard**
 ![Alt text](image.png)
 
-**The user has to go through series of questions.**
+**The user will type in the city and get the current & 5 day forecast**
 ![Alt text](image-1.png)
-![Alt text](image-2.png)
 
-**Enter Initial page**
+**The city is saved from recent to old**
+![Alt text](image-2.png)
 ![Alt text](image-3.png)
 
-**High Score page**
-![Alt text](image-4.png)
-
-**The user will be shown the below page if time is up**
-![Alt text](image-5.png)
 
 **Languages**
 HTML, CSS, JavaScript
 
+**Libraries**
+Dayjs, Bootstrap.
+
 **Credits**
 Edited by Kai Gurung-Doll; https://github.com/KaiDoll.
-Link to the Challenge: https://kaidoll.github.io/Code-Quiz-Time/
+Link to the Challenge: https://kaidoll.github.io/weather-app/
